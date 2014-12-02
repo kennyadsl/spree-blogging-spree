@@ -4,7 +4,7 @@ class BlogEntriesController < Spree::BaseController
 
   def show
     unless @blog_entry = BlogEntry.find_by_permalink(params[:slug])
-        render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
+      render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
     end
   end
 
@@ -25,12 +25,12 @@ class BlogEntriesController < Spree::BaseController
   private
 
   def load_news_archive_data
-      unless Spree::Config[:blog_entries_recent_sidebar].blank?
-          @latest = BlogEntry.latest(Spree::Config[:blog_entries_recent_sidebar])
-          @archives = BlogEntry.organize_archives(@latest.to_a.last.created_at) unless @latest.blank?
-      else
-          @archives = BlogEntry.organize_archives
-      end
+    unless Spree::Config[:blog_entries_recent_sidebar].blank?
+      @latest = BlogEntry.latest(Spree::Config[:blog_entries_recent_sidebar])
+      @archives = BlogEntry.organize_archives(@latest.to_a.last.created_at) unless @latest.blank?
+    else
+      @archives = BlogEntry.organize_archives
+    end
   end
 
   def pagination_options(params)

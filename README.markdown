@@ -41,3 +41,11 @@ NB: tests may not work with Spree 0.30 and Rails 3
 The included spec_helper.rb is configured for use with Spork due to Spree's extended loading time.
 
 Following the lead of the Spree development team, all tests have been converted to shoulda from RSpec.
+
+Disqus
+-------------
+
+You can enable the [disqus](https://disqus.com/about/) comments for your blog articles configuring these preferences:
+*   `Spree::BloggingSpree::Config[:use_disqus]`: true/false (global enable/disable disqus comments)
+*   `Spree::BloggingSpree::Config[:disqus_shortname]`: 'yourdiscussion' (when you add a new website in the disqus administration panel [https://disqus.com/admin/create/](https://disqus.com/admin/create/) you must define a Unique Disqus URL yourdiscussion.disqus.com. 'yourdiscussion' will be your website specific disqus_shortname)
+*   `Spree::BloggingSpree::Config[:disqus_title_sitename]`: 'yoursiteidentifier' (this preference will be passed to disqus to create the title of the discussion inside disqus moderation panel. If not defined, the title of the discussion will be the same of article title in your spree blog, else it'll be composed like this: "yoursiteidentifier - your article name")
