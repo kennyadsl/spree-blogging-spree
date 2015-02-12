@@ -5,7 +5,7 @@ class BlogEntry < ActiveRecord::Base
   before_save :create_permalink
   validates_presence_of :title
 
-  default_scope order("created_at DESC")
+  default_scope lambda { order("created_at DESC") }
   scope :published, lambda { where("blog_entries.created_at <= ?", Time.zone.now) }
   scope :latest, lambda { |n| published.limit(n.to_i) }
 
