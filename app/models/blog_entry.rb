@@ -5,14 +5,15 @@ class BlogEntry < ActiveRecord::Base
   before_save :create_permalink
   validates_presence_of :title
 
-  default_scope lambda { order("created_at DESC") }
+  scope :created_at_desc, lambda { order("blog_entries.created_at DESC") }
+  default_scope created_at_desc
   scope :published, lambda { where("blog_entries.created_at <= ?", Time.zone.now) }
   scope :latest, lambda { |n| published.limit(n.to_i) }
 
   has_many :images, :as => :viewable, :dependent => :destroy, :class_name => "BlogEntryImage"
 
   accepts_nested_attributes_for :images, :reject_if => lambda { |a| a[:attachment].blank? && a[:_destroy] != "1" }, :allow_destroy => true
- 
+
   def self.by_date(date, period = nil)
     if date.is_a?(Hash)
       keys = [:day, :month, :year].select {|key| date.include?(key) }
@@ -22,7 +23,7 @@ class BlogEntry < ActiveRecord::Base
 
     time = date.to_time.in_time_zone
     find(:all, :conditions => {:created_at => (time.send("beginning_of_#{period}")..time.send("end_of_#{period}") )} )
-  end 
+  end
 
   def self.by_tag(name)
     find(:all, :select => 'DISTINCT blog_entries.*', :joins => [:taggings, :tags], :conditions => {'tags.name' => name })
