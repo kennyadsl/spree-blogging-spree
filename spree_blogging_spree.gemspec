@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_blogging_spree'
+  s.author      = 'Nebulab'
   s.version     = '0.2.1'
   s.summary     = 'BloggingSpree: A Spree blogging solution (Updated to Spree 0.30 and Rails 3)'
   #s.description = 'Add (optional) gem description here'
