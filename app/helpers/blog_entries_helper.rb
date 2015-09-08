@@ -5,8 +5,11 @@ module BlogEntriesHelper
   end
 
   def disqus_title(title)
-    return title unless Spree::BloggingSpree::Config[:disqus_title_sitename].present?
-    else "#{Spree::BloggingSpree::Config[:disqus_title_sitename]} - #{title}"
+    unless Spree::BloggingSpree::Config[:disqus_title_sitename].present?
+      title
+    else
+      "#{Spree::BloggingSpree::Config[:disqus_title_sitename]} - #{title}"
+    end
   end
 
 end
